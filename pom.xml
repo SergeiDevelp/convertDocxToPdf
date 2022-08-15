@@ -89,9 +89,11 @@
                         <configuration>
                             <archive>
                                 <manifest>
+                                    <addClasspath>true</addClasspath>
                                     <mainClass>
                                         ru.nipigas.zakhrov.converter.App
                                     </mainClass>
+
                                 </manifest>
                             </archive>
                             <descriptorRefs>
