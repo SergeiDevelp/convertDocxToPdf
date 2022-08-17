@@ -24,7 +24,7 @@ public class App {
         ArrayList<File> fileListPdf = new ArrayList<>();
         //Загрузить документа Word
         try {
-            searchFilesDocx(sourceDirectory, fileListDocx); //directoryJar.toUri()
+            SearchPath.searchFilesDocx(sourceDirectory, fileListDocx); //directoryJar.toUri()
              //directoryJar.toUri()
             for (File file :
                     fileListDocx) {
@@ -45,12 +45,12 @@ public class App {
 
         //Проставляем штамп
         try {
-            searchFilesPdf(sourceDirectory, fileListPdf);
+            SearchPath.searchFilesPdf(sourceDirectory, fileListPdf);
             for (File file :
                     fileListPdf) {
                 System.out.println(file.getAbsolutePath());
             }
-            ImageStamp.stamp(sourceDirectory,fileListPdf); //"C:\\Users\\user\\Desktop\\tests\\forConverter\\converter123.docx.pdf"
+            ImageStamp.stamp(searchPath.findPathDirectory(), fileListPdf); //"C:\\Users\\user\\Desktop\\tests\\forConverter\\converter123.docx.pdf"
             ImageStamp.dynamicStamp(sourceDirectory,fileListPdf);
 
         }catch (Exception e) {
@@ -60,40 +60,40 @@ public class App {
         System.out.println("Hello World!");
     }
 
-    private static void searchFilesDocx(File rootFile, List<File> fileList) {
-        if (rootFile.isDirectory()) { //TODO находит все файлы от корня и в глубину, хочу ограничить только корнем либо только 2 уровнем вложенности
-            File[] directoryFiles = rootFile.listFiles();
-            if (directoryFiles != null) {
-                for (File file : directoryFiles) {
-                    if (file.isDirectory()) {
-                        searchFilesDocx(file, fileList);
-                    } else {
-                        if (file.getName().toLowerCase().endsWith(".docx")) {
-                            fileList.add(file);
-                        }
-                    }
-
-                }
-
-            }
-        }
-    }
-    private static void searchFilesPdf(File rootFile, List<File> fileList) {
-        if (rootFile.isDirectory()) { //TODO находит все файлы от корня и в глубину, хочу ограничить только корнем либо только 2 уровнем вложенности
-            File[] directoryFiles = rootFile.listFiles();
-            if (directoryFiles != null) {
-                for (File file : directoryFiles) {
-                    if (file.isDirectory()) {
-                        searchFilesPdf(file, fileList);
-                    } else {
-                        if (file.getName().toLowerCase().endsWith(".pdf")) {
-                            fileList.add(file);
-                        }
-                    }
-
-                }
-
-            }
-        }
-    }
+//    private static void searchFilesDocx(File rootFile, List<File> fileList) {
+//        if (rootFile.isDirectory()) { //TODO находит все файлы от корня и в глубину, хочу ограничить только корнем либо только 2 уровнем вложенности
+//            File[] directoryFiles = rootFile.listFiles();
+//            if (directoryFiles != null) {
+//                for (File file : directoryFiles) {
+//                    if (file.isDirectory()) {
+//                        searchFilesDocx(file, fileList);
+//                    } else {
+//                        if (file.getName().toLowerCase().endsWith(".docx")) {
+//                            fileList.add(file);
+//                        }
+//                    }
+//
+//                }
+//
+//            }
+//        }
+//    }
+//    private static void searchFilesPdf(File rootFile, List<File> fileList) {
+//        if (rootFile.isDirectory()) { //TODO находит все файлы от корня и в глубину, хочу ограничить только корнем либо только 2 уровнем вложенности
+//            File[] directoryFiles = rootFile.listFiles();
+//            if (directoryFiles != null) {
+//                for (File file : directoryFiles) {
+//                    if (file.isDirectory()) {
+//                        searchFilesPdf(file, fileList);
+//                    } else {
+//                        if (file.getName().toLowerCase().endsWith(".pdf")) {
+//                            fileList.add(file);
+//                        }
+//                    }
+//
+//                }
+//
+//            }
+//        }
+//    }
 }

@@ -7,13 +7,47 @@ import java.io.InputStream;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Properties;
+import java.util.*;
 
 public class SearchPath  {
 
+
+    public static void searchFilesDocx(File rootFile, List<File> fileList) {
+        if (rootFile.isDirectory()) { //TODO находит все файлы от корня и в глубину, хочу ограничить только корнем либо только 2 уровнем вложенности
+            File[] directoryFiles = rootFile.listFiles();
+            if (directoryFiles != null) {
+                for (File file : directoryFiles) {
+                    if (file.isDirectory()) {
+                        searchFilesDocx(file, fileList);
+                    } else {
+                        if (file.getName().toLowerCase().endsWith(".docx")) {
+                            fileList.add(file);
+                        }
+                    }
+
+                }
+
+            }
+        }
+    }
+    public static void searchFilesPdf(File rootFile, List<File> fileList) {
+        if (rootFile.isDirectory()) { //TODO находит все файлы от корня и в глубину, хочу ограничить только корнем либо только 2 уровнем вложенности
+            File[] directoryFiles = rootFile.listFiles();
+            if (directoryFiles != null) {
+                for (File file : directoryFiles) {
+                    if (file.isDirectory()) {
+                        searchFilesPdf(file, fileList);
+                    } else {
+                        if (file.getName().toLowerCase().endsWith(".pdf")) {
+                            fileList.add(file);
+                        }
+                    }
+
+                }
+
+            }
+        }
+    }
     //ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
     //Properties properties = new Properties();
     public Map<String, String> findPathDirectory() throws IOException {
@@ -34,8 +68,10 @@ public class SearchPath  {
         Map<String, String> map = new HashMap<>();
         properties.forEach((k, v) -> {map.put((String) k, (String) v);});
         //map.forEach((k, v) -> System.out.println((k + ":" + v)));
-        File sourceDirectory = new File(properties.getProperty("directoryData"));
+        //File sourceDirectory = new File(properties.getProperty("directoryData"));
 
         return map;
     }
+
+
 }
