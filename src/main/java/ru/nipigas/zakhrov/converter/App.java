@@ -13,8 +13,11 @@ import java.util.*;
 public class App {
     public static void main(String[] args) throws IOException {
         SearchPath searchPath = new SearchPath();
+        //Map<String, String> map2;
+        //map2 = searchPath.findPathDirectory().;
+        //File sourceDirectory = new File(map2.get("directoryData"));  //searchPath.findPathDirectory();
+        File sourceDirectory = new File(searchPath.findPathDirectory().get("directoryData"));
 
-        File sourceDirectory = searchPath.findPathDirectory();
         String compName = InetAddress.getLocalHost().getHostName();//TODO можно получить имя компа, составить путь до ClassLoader, и создать путь автоматически записав в проперти?
         System.out.println(compName);
         ArrayList<File> fileListDocx = new ArrayList<>();
@@ -48,6 +51,7 @@ public class App {
                 System.out.println(file.getAbsolutePath());
             }
             ImageStamp.stamp(sourceDirectory,fileListPdf); //"C:\\Users\\user\\Desktop\\tests\\forConverter\\converter123.docx.pdf"
+            ImageStamp.dynamicStamp(sourceDirectory,fileListPdf);
 
         }catch (Exception e) {
             e.printStackTrace();
